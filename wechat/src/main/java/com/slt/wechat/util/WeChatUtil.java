@@ -21,10 +21,10 @@ import com.slt.wechat.entity.Menu;
 
 public class WeChatUtil {
 	//微信接口开发
-	public static final String WECHAT_APPID = "wx1281642e1961bce3";
-	public static final String WECHAT_APPSECRET = "b8a02cf3878708550b551b0dca41b007";
-	public static final String WECHAT_ENCODINGAESKEY = "kZm5SwgYIxnaTTZnWvUgQ2M6wiVKfjqzgrVhrFVeBJh";
-	public static String WECHAT_ACCESS_TOKEN = "5_kthhZsR1NuXkmOuHAlH4Q3mzenYzFCqRys8sGgZwia2GNI_7QBcDvOFbRPuwMMnEcuG52XXxpLeIljzRuLv-g-2JkRCBafrUDMZKADGnKZW0Z6nsABdhnCqEleBD9L3UmX_ozFGu4CCd4DY6KPZeABAOTD";
+	public static final String WECHAT_APPID = "wxa621dd22e8529f38";
+	public static final String WECHAT_APPSECRET = "2b2d7de86c75c332dfa1932711716b60";
+	public static final String WECHAT_ENCODINGAESKEY = "YksSdPMy5mz4NYGxkw9dTeguobKQRtinYUhI3fKADDS";
+	public static String WECHAT_ACCESS_TOKEN = "5_sNc0BUapYVoh5RyBUGFz1YQPljQrtukZzPsJxjk-MdiqUtfYvkcBnF9u4haLaXAyeQHO4J3r5MCiUYHcBIwcn1OClRA_A6P1JZ5KU_KNR2nO9VI5c7uvpq1wbd6DpfkG5HL3S8jRIxadb3bJWARjADALPG";
 	public static final String WECHAT_DEV_URL="https://api.weixin.qq.com";
 	
 	//public static final String WECHAT_CREATEMUEN_URL=" https://api.weixin.qq.com/cgi-bin/menu/create";
@@ -50,13 +50,13 @@ public class WeChatUtil {
 		List<NameValuePair> formParams = new ArrayList<NameValuePair>();
 		formParams.add(new BasicNameValuePair("access_token",WECHAT_ACCESS_TOKEN));
 		URI uri = new URIBuilder(WECHAT_DEV_URL).setPath("/cgi-bin/menu/create").addParameters(formParams).build();
-		UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formParams,"UTF-8");
+		UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formParams);
 		Request request = HttpUtil.buildPostRequest(uri).body(entity);
 		//菜单
 		Button[] bts = {new Button("企鹅易购", "view", "shop_btn", "http://121.42.147.37:8080", null),new Button("个人中心", "view", "self_btn", "http://121.42.147.37:8080", null),new Button("我的卡券", "view", "card_btn", "http://121.42.147.37:8080", null)};
 		Menu menu = new Menu(bts);
-		String str = JsonUtil.obj2Json(menu).toJSONString();
-		request.bodyString(str, ContentType.TEXT_PLAIN);
+		String menuStr = JsonUtil.obj2Json(menu).toJSONString();
+		request.bodyByteArray(menuStr.getBytes("UTF-8"));
 		Response response = request.execute();
 		HttpResponse httpResponse = response.returnResponse();
 		String retStr = EntityUtils.toString(httpResponse.getEntity(),Consts.UTF_8);
@@ -68,6 +68,6 @@ public class WeChatUtil {
 	public static void main(String[] args) throws Exception {
 		//String ss = getAccessToken();
 		//System.out.println(ss);
-		createMenu();
+		//createMenu();
 	}
 }
