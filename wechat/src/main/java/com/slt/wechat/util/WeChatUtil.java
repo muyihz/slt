@@ -24,7 +24,7 @@ public class WeChatUtil {
 	public static final String WECHAT_APPID = "wxa621dd22e8529f38";
 	public static final String WECHAT_APPSECRET = "2b2d7de86c75c332dfa1932711716b60";
 	public static final String WECHAT_ENCODINGAESKEY = "YksSdPMy5mz4NYGxkw9dTeguobKQRtinYUhI3fKADDS";
-	public static String WECHAT_ACCESS_TOKEN = "5_sNc0BUapYVoh5RyBUGFz1YQPljQrtukZzPsJxjk-MdiqUtfYvkcBnF9u4haLaXAyeQHO4J3r5MCiUYHcBIwcn1OClRA_A6P1JZ5KU_KNR2nO9VI5c7uvpq1wbd6DpfkG5HL3S8jRIxadb3bJWARjADALPG";
+	public static String WECHAT_ACCESS_TOKEN = "5_Gu7GlrtjahwFsjefEOcIWIodkhbQXv0-OhXJfD7ZnoLxGcfuOTWnIWOc-vNfBJCj1Iy0DV66jsuXr91uJkOVfZVscOb_HyDbtBd8HcS_chWQLc1lijR-CLpwx6SC055CRFEYaGqsGnPMsYFEUIUbAHADRD";
 	public static final String WECHAT_DEV_URL="https://api.weixin.qq.com";
 	
 	//public static final String WECHAT_CREATEMUEN_URL=" https://api.weixin.qq.com/cgi-bin/menu/create";
@@ -53,7 +53,7 @@ public class WeChatUtil {
 		UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formParams);
 		Request request = HttpUtil.buildPostRequest(uri).body(entity);
 		//菜单
-		Button[] bts = {new Button("企鹅易购", "view", "shop_btn", "http://121.42.147.37:8080", null),new Button("个人中心", "view", "self_btn", "http://121.42.147.37:8080", null),new Button("我的卡券", "view", "card_btn", "http://121.42.147.37:8080", null)};
+		Button[] bts = {new Button("企鹅易购", "view", "shop_btn", "http://121.42.147.37:8080/html/index.html", null),new Button("个人中心", "view", "self_btn", "http://121.42.147.37:8080/html/index.html", null),new Button("我的卡券", "view", "card_btn", "http://121.42.147.37:8080/html/index.html", null)};
 		Menu menu = new Menu(bts);
 		String menuStr = JsonUtil.obj2Json(menu).toJSONString();
 		request.bodyByteArray(menuStr.getBytes("UTF-8"));
@@ -68,6 +68,6 @@ public class WeChatUtil {
 	public static void main(String[] args) throws Exception {
 		//String ss = getAccessToken();
 		//System.out.println(ss);
-		//createMenu();
+		createMenu();
 	}
 }
